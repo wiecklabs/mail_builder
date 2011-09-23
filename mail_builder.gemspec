@@ -15,5 +15,6 @@ Gem::Specification.new do |s|
   s.require_path = 'lib'
   s.files = %w(Rakefile) + Dir.glob("lib/**/*")
 
-  s.add_dependency "mail_builder"
+  s.add_dependency "mime-types"
+  s.add_dependency "uuidtools"
 end

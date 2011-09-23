@@ -51,12 +51,21 @@ class MailBuilder
   ##
   # Printable characters which RFC 2047 says must be escaped.
   ##
-  RFC2047_REPLACEMENTS = [
-    ['?', '=%X' % ??],
-    ['_', '=%X' % ?_],
-    [' ', '_'],
-    [/=$/, '']
-  ].freeze
+  if RUBY_VERSION =~ /^1\.9/
+    RFC2047_REPLACEMENTS = [
+      ['?', '=%X' % ??.ord],
+      ['_', '=%X' % ?_.ord],
+      [' ', '_'],
+      [/=$/, '']
+    ].freeze
+  else
+    RFC2047_REPLACEMENTS = [
+      ['?', '=%X' % ??],
+      ['_', '=%X' % ?_],
+      [' ', '_'],
+      [/=$/, '']
+    ].freeze
+  end
 
   attr_accessor :html, :text
   attr_reader :headers, :attachments
